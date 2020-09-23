@@ -2,8 +2,8 @@
 
 :root {
   --color-text: #666;
-  --color-tint: #f8879d;
-  --color-high-text: #ff5777;
+  --color-tint: #000;
+  --color-high-text: #000;
   --color-background: #fff;
   --font-size: 14px;
   --line-height: 1.5;
