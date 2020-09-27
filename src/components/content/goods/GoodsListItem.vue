@@ -26,7 +26,7 @@ export default {
 .goods-item {
   padding-bottom: 40px;
   position: relative;
-  width: 48%;
+  width: 45%;
 }
 
 .goods-item img {
@@ -52,7 +52,5 @@ export default {
   margin-bottom: 3px;
 }
 
-.goods-info .price {
-  /*margin-right: 30px;*/
-}
+
 </style>

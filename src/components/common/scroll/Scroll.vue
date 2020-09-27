@@ -28,8 +28,6 @@ export default {
       probeType: this.probeType
     })
 
-    this.scroll.scrollTo(0,0)
-
     this.scroll.on('scroll', (position) => {
       this.$emit('scroll', position)
     })

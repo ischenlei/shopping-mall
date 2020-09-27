@@ -3,13 +3,18 @@
     <nav-bar class="home-nav">
       <div slot="center">BEAUTYLISH</div>
     </nav-bar>
-
+    <tab-control :titles="['流行', '新款', '精选']"
+                 @tabClick="tabClick"
+                 ref="tabControl1"
+                 class="tab-control"
+                 v-show="isTabFixed"/>
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
-      <home-swiper :banners="banners"/>
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"/>
       <recommend-view :recommends="recommends"/>
       <feature-view/>
-      <tab-control class="tab-control"
-                   :titles="['流行', '新款', '精选']" @tabClick="tabClick"/>
+      <tab-control :titles="['流行', '新款', '精选']"
+                   @tabClick="tabClick"
+                   ref="tabControl2"/>
       <goods-list :goods="showGoods"/>
     </scroll>
 
@@ -107,6 +112,17 @@ export default {
             title: 'freeplus芙丽芳丝净润洗面霜',
             price: 255
           },
+          {
+            url: require('@/assets/img/home/goods/pop7.jpg'),
+            title: '玫珂菲全新双用水粉霜',
+            price: '￥ 380.00'
+          },
+          {
+            url: require('@/assets/img/home/goods/pop8.jpg'),
+            title: '魅可立体绒光修容饼',
+            price: '¥ 340'
+          },
+
         ],
         'new': [
           {
@@ -131,13 +147,23 @@ export default {
           },
           {
             url: require('@/assets/img/home/goods/new5.jpg'),
-            title: '兰蔻 「小黑瓶」全规格精华肌底液\t',
+            title: '兰蔻 「小黑瓶」全规格精华肌底液',
             price: 255
           },
           {
             url: require('@/assets/img/home/goods/new6.jpg'),
-            title: '娇兰金钻修颜粉底液30ml\t',
+            title: '娇兰金钻修颜粉底液30ml',
             price: 255
+          },
+          {
+            url: require('@/assets/img/home/goods/new7.jpg'),
+            title: '限定柔雾唇膏',
+            price: '￥180'
+          },
+          {
+            url: require('@/assets/img/home/goods/new8.jpg'),
+            title: '定制无瑕柔光散粉',
+            price: '¥290'
           },
         ],
         'sell': [
@@ -168,13 +194,25 @@ export default {
           },
           {
             url: require('@/assets/img/home/goods/sell4.jpg'),
-            title: 'LA MER海蓝之谜精华面霜 经典传奇面霜',
+            title: 'LA MER海蓝之谜精华面霜',
             price: 255
+          },
+          {
+            url: require('@/assets/img/home/goods/sell7.jpg'),
+            title: '定制无瑕粉底液',
+            price: '¥ 320'
+          },
+          {
+            url: require('@/assets/img/home/goods/sell8.jpg'),
+            title: 'GIVENCHY纪梵希四宫格散粉',
+            price: '¥550'
           },
         ]
       },
       currentType: 'pop',
-      isShowBackTop: false
+      isShowBackTop: false,
+      tabOffsetTop: 0,
+      isTabFixed: false
     }
   },
   computed: {
@@ -195,21 +233,33 @@ export default {
           this.currentType = 'sell'
           break
       }
+      this.$refs.tabControl1.currentIndex = index;
+      this.$refs.tabControl2.currentIndex = index;
     },
     backClick() {
       this.$refs.scroll.scrollTo(0, 0)
     },
     contentScroll(position) {
+      console.log(-position.y)
+      //判断backTop是否显示
       this.isShowBackTop = (-position.y) > 500
-    },
-  }
 
+      //决定tabControl是否吸顶
+      this.isTabFixed = (-position.y) > this.tabOffsetTop
+    },
+    swiperImageLoad() {
+      //获取tabControl的offsetTop
+      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
+    }
+  },
+  mounted() {
+
+  }
 }
 </script>
 
 <style scoped>
 #home {
-  padding-top: 44px;
   height: 100vh;
   position: relative;
 }
@@ -217,18 +267,19 @@ export default {
 .home-nav {
   background-color: var(--color-tint);
   color: #fff;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9;
+
+  /*position: fixed;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*z-index: 9;*/
 }
 
 .tab-control {
-  position: sticky;
-  top: 44px;
+  position: relative;
   z-index: 9;
 }
+
 
 .content {
   overflow: hidden;
