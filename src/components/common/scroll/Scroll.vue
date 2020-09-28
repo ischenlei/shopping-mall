@@ -25,7 +25,9 @@ export default {
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {
       click: true,
-      probeType: this.probeType
+      probeType: this.probeType,
+      mouseWheel: true,
+      bounce: false,
     })
 
     this.scroll.on('scroll', (position) => {
@@ -36,6 +38,9 @@ export default {
   methods: {
     scrollTo(x, y, time=300) {
       this.scroll.scrollTo(x, y, time)
+    },
+    getScrollY() {
+      return this.scroll ? this.scroll.y : 0
     }
   }
 }

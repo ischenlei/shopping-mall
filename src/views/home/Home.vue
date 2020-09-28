@@ -8,6 +8,7 @@
                  ref="tabControl1"
                  class="tab-control"
                  v-show="isTabFixed"/>
+
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
       <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"/>
       <recommend-view :recommends="recommends"/>
@@ -48,177 +49,35 @@ export default {
   },
   data() {
     return {
-      banners: [
-        {
-          url: require('@/assets/img/home/banners/banner1.jpg'),
-        },
-        {
-          url: require('@/assets/img/home/banners/banner3.jpg'),
-        },
-        {
-          url: require('@/assets/img/home/banners/banner4.jpg'),
-        },
-        {
-          url: require('@/assets/img/home/banners/banner2.jpg'),
-        },
-      ],
-      recommends: [
-        {
-          url: require('@/assets/img/home/recommends/保证.png'),
-          title: '明星单品',
-        },
-        {
-          url: require('@/assets/img/home/recommends/热卖.png'),
-          title: '热卖',
-        },
-        {
-          url: require('@/assets/img/home/recommends/礼物.png'),
-          title: '礼物',
-        },
-        {
-          url: require('@/assets/img/home/recommends/优惠券.png'),
-          title: '优惠券',
-        },
-      ],
-      goods: {
-        'pop': [
-          {
-            url: require('@/assets/img/home/goods/pop1.jpg'),
-            title: 'Urban DecayUD衰败城市NAKED HEAT2/3代',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/pop2.jpg'),
-            title: 'MAC/魅可全色号子弹头口红唇膏',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/pop3.jpg'),
-            title: 'Wet n Wild Color Icon维特娃魅影',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/pop4.jpg'),
-            title: 'BOBBI BROWN芭比波朗化妆刷',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/pop5.jpg'),
-            title: 'shu uemura植村秀绿茶新肌洁颜油卸妆油',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/pop6.jpg'),
-            title: 'freeplus芙丽芳丝净润洗面霜',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/pop7.jpg'),
-            title: '玫珂菲全新双用水粉霜',
-            price: '￥ 380.00'
-          },
-          {
-            url: require('@/assets/img/home/goods/pop8.jpg'),
-            title: '魅可立体绒光修容饼',
-            price: '¥ 340'
-          },
-
-        ],
-        'new': [
-          {
-            url: require('@/assets/img/home/goods/new1.jpg'),
-            title: '娇兰花草水语淡香水75ml',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/new2.jpg'),
-            title: 'YSL圣罗兰Mon Paris反转巴黎女士香水',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/new3.jpg'),
-            title: '套刷cici化妆刷眼部眼影套装四件套',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/new4.jpg'),
-            title: '无印良品MUJI 睫毛夹',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/new5.jpg'),
-            title: '兰蔻 「小黑瓶」全规格精华肌底液',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/new6.jpg'),
-            title: '娇兰金钻修颜粉底液30ml',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/new7.jpg'),
-            title: '限定柔雾唇膏',
-            price: '￥180'
-          },
-          {
-            url: require('@/assets/img/home/goods/new8.jpg'),
-            title: '定制无瑕柔光散粉',
-            price: '¥290'
-          },
-        ],
-        'sell': [
-          {
-            url: require('@/assets/img/home/goods/sell5.jpg'),
-            title: '娇兰幻彩流星粉球 透明散粉定妆粉',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/sell6.jpg'),
-            title: 'dior/迪奥香水真我套装',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/sell1.jpg'),
-            title: '日本嘉娜宝ALLIE皑丽矿物保湿防晒霜',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/sell2.jpg'),
-            title: '资生堂红妍肌活眼部精华露15ml',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/sell3.jpg'),
-            title: 'Kiehl\'s科颜氏高保湿面膜 125ml',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/sell4.jpg'),
-            title: 'LA MER海蓝之谜精华面霜',
-            price: 255
-          },
-          {
-            url: require('@/assets/img/home/goods/sell7.jpg'),
-            title: '定制无瑕粉底液',
-            price: '¥ 320'
-          },
-          {
-            url: require('@/assets/img/home/goods/sell8.jpg'),
-            title: 'GIVENCHY纪梵希四宫格散粉',
-            price: '¥550'
-          },
-        ]
-      },
+      banners: [],
+      recommends: [],
+      goods: {},
       currentType: 'pop',
       isShowBackTop: false,
       tabOffsetTop: 0,
-      isTabFixed: false
+      isTabFixed: false,
+      saveY: 0
     }
   },
   computed: {
     showGoods() {
       return this.goods[this.currentType]
     }
+  },
+  created() {
+    this.banners = this.$store.state.banners;
+    this.recommends = this.$store.state.recommends;
+    this.goods = this.$store.state.goods;
+  },
+  destroyed() {
+    console.log('destroyed')
+  },
+  activated() {
+    this.$refs.scroll.scrollTo(0, this.saveY, 0);
+    this.$refs.scroll.scroll.refresh();
+  },
+  deactivated() {
+    this.saveY = this.$refs.scroll.getScrollY();
   },
   methods: {
     tabClick(index) {
@@ -240,7 +99,7 @@ export default {
       this.$refs.scroll.scrollTo(0, 0)
     },
     contentScroll(position) {
-      console.log(-position.y)
+      // console.log(-position.y)
       //判断backTop是否显示
       this.isShowBackTop = (-position.y) > 500
 
@@ -252,9 +111,7 @@ export default {
       this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
     }
   },
-  mounted() {
 
-  }
 }
 </script>
 

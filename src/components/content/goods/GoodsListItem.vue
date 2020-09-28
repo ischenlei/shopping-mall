@@ -1,9 +1,9 @@
 <template>
-  <div class="goods-item">
+  <div class="goods-item" @click="itemClick">
     <img :src="goodsItem.url" alt="">
     <div class="goods-info">
       <p>{{ goodsItem.title }}</p>
-      <span class="price">{{goodsItem.price}}</span>
+      <span class="price">{{ goodsItem.price }}</span>
     </div>
   </div>
 </template>
@@ -17,6 +17,12 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  methods: {
+    itemClick() {
+      console.log('跳转到详情页');
+      this.$router.push('/detail/' + this.goodsItem.id)
     }
   }
 }
@@ -44,7 +50,7 @@ export default {
   text-align: center;
 }
 
-.goods-info p{
+.goods-info p {
   float: bottom;
   overflow: hidden;
   text-overflow: ellipsis;
