@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     imageLoad() {
-      this.$refs.scroll.refresh
+      this.$refs.scroll.refresh()
     },
     titleClick(index) {
       // console.log(index)

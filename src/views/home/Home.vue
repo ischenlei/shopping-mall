@@ -74,7 +74,8 @@ export default {
   },
   activated() {
     this.$refs.scroll.scrollTo(0, this.saveY, 0);
-    this.$refs.scroll.scroll.refresh();
+    this.$refs.scroll.refresh();
+    // console.log(this.$refs.scroll)
   },
   deactivated() {
     this.saveY = this.$refs.scroll.getScrollY();
@@ -108,10 +109,10 @@ export default {
     },
     swiperImageLoad() {
       //获取tabControl的offsetTop
-      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
+      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
+      this.$refs.scroll.refresh();
     }
   },
-
 }
 </script>
 
