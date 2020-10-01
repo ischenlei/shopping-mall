@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     imageLoad() {
-      this.$emit('imageLoad');
+      this.$emit('detailImageLoad');
     }
   },
 }

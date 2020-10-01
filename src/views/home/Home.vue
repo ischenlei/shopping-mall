@@ -138,7 +138,6 @@ export default {
   z-index: 9;
 }
 
-
 .content {
   overflow: hidden;
   position: absolute;

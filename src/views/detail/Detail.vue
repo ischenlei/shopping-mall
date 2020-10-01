@@ -1,16 +1,18 @@
 <template>
   <div id="detail">
     <detail-nav-bar class="detail-nav" @titleClick="titleClick"/>
-    <scroll class="content" ref="scroll">
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
       <detail-swiper :top-images="topImages"/>
       <detail-base-info :goods="goods"/>
       <detail-shop-info :shop="shop"/>
       <detail-goods-info
         :detail-images="detailImages"
-        @imageLoad="imageLoad"
+        @detailImageLoad="detailImageLoad"
         ref="goodsImage"/>
       <goods-list :goods="recommends" ref="recommend"/>
     </scroll>
+    <back-top @click.native="backClick" v-show="isShowBackTop"/>
+    <detail-bottom-bar @addCart="addCart"/>
   </div>
 </template>
 
@@ -20,20 +22,24 @@ import DetailSwiper from "@/views/detail/childComps/DetailSwiper";
 import DetailBaseInfo from "@/views/detail/childComps/DetailBaseInfo";
 import DetailShopInfo from "@/views/detail/childComps/DetailShopInfo";
 import DetailGoodsInfo from "@/views/detail/childComps/DetailGoodsInfo";
+import DetailBottomBar from "@/views/detail/childComps/DetailBottomBar";
 
 import GoodsList from "@/components/content/goods/GoodsList";
+import BackTop from "@/components/content/backTop/BackTop";
 
 import Scroll from "@/components/common/scroll/Scroll";
 
 export default {
   name: "Detail",
   components: {
-    GoodsList,
     DetailNavBar,
     DetailSwiper,
     DetailBaseInfo,
     DetailShopInfo,
     DetailGoodsInfo,
+    DetailBottomBar,
+    GoodsList,
+    BackTop,
     Scroll
   },
   data() {
@@ -45,6 +51,7 @@ export default {
       detailImages: [],
       recommends: [],
       topY: [],
+      isShowBackTop: false,
     }
 
   },
@@ -72,22 +79,42 @@ export default {
 
   },
   methods: {
-    imageLoad() {
+    detailImageLoad() {
       this.$refs.scroll.refresh()
     },
     titleClick(index) {
       // console.log(index)
       this.$refs.scroll.scrollTo(0, this.topY[index], 200)
+    },
+    contentScroll(position) {
+      this.isShowBackTop = (-position.y) > 1000
+      // console.log(position)
+      const positionY = -position.y
+      for (let i = 0; i < this.topY.length; i++) {
+
+      }
+    },
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0)
+    },
+    addCart() {
+      const product = {}
+      product.id = this.id
+      product.image = this.topImages[0].url
+      product.title = this.goods.title
+      product.price = this.goods.newPrice
+
+      // console.log(product)
+      this.$store.dispatch('addCart', product)
     }
   },
   mounted() {
     this.topY = []
-
     this.topY.push(0);
     this.topY.push(-this.$refs.goodsImage.$el.offsetTop)
     this.topY.push(-this.$refs.recommend.$el.offsetTop)
+    // console.log(this.topY);
 
-    console.log(this.topY);
   }
 }
 </script>
@@ -105,6 +132,6 @@ export default {
   background-color: #fff;
 }
 .content {
-  height: calc(100% - 44px);
+  height: calc(100% - 44px - 49px);
 }
 </style>
