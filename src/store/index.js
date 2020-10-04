@@ -197,6 +197,7 @@ const state = {
         title: "Urban Decay官方正品衰败城市Naked Heat南瓜枫叶盘哑光眼影盘ud",
         desc: '',
         newPrice: '￥420',
+        price: 420,
         sales: '月销1222',
         columns: [
           {
@@ -282,6 +283,7 @@ const state = {
         title: "MAC/魅可尤雾弹哑光唇膏口红大牌正品923/316 奶茶色",
         desc: '',
         newPrice: '￥180',
+        price: 180,
         sales: '月销5.0万+',
         columns: [
           {
@@ -339,6 +341,7 @@ const state = {
         title: "维特娃眼影wet n wild湿又野八色眼影盘",
         desc: '',
         newPrice: '￥40',
+        price: 40,
         sales: '月销1388',
         columns: [
           {
@@ -395,6 +398,7 @@ const state = {
         title: "BOBBI BROWN芭比波朗魔术底妆刷 化妆刷新手适用 舒适柔滑 贴合",
         desc: '',
         newPrice: '￥440',
+        price: 440,
         sales: '月销68',
         columns: [
           {
@@ -449,6 +453,7 @@ const state = {
         title: "日本shu uemura植村秀绿茶新肌洁颜油脸部卸妆油温和眼唇深层清洁",
         desc: '',
         newPrice: '￥259',
+        price: 259,
         sales: '月销68',
         columns: [
           {
@@ -503,6 +508,7 @@ const state = {
         title: "freeplus芙丽芳丝洗面奶氨基酸系净润洗面霜男女温和清洁敏感肌",
         desc: '',
         newPrice: '￥150',
+        price: 150,
         sales: '月销5万+',
         columns: [
           {
@@ -561,6 +567,7 @@ const state = {
         title: "MAKEUPFOREVER玫珂菲全新双用水粉霜粉底水润轻薄",
         desc: '',
         newPrice: '￥380',
+        price: 380,
         sales: '月销500+',
         columns: [
           {
@@ -617,6 +624,7 @@ const state = {
         title: "【立减10元】MAC/魅可立体绒光修容盘生姜高光闪粉修容提亮",
         desc: '',
         newPrice: '￥340',
+        price: 340,
         sales: '月销1万+',
         columns: [
           {

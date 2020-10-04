@@ -102,9 +102,9 @@ export default {
       product.id = this.id
       product.image = this.topImages[0].url
       product.title = this.goods.title
-      product.price = this.goods.newPrice
+      product.price = this.goods.price
 
-      // console.log(product)
+      console.log(product)
       this.$store.dispatch('addCart', product)
     }
   },
