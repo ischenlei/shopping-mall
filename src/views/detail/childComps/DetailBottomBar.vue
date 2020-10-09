@@ -13,7 +13,7 @@ export default {
   name: "DetailBottomBar",
   methods: {
     addCart() {
-      console.log('添加到购物车')
+      // console.log('添加到购物车')
       this.$emit('addCart')
     }
   }

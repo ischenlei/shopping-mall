@@ -11,8 +11,10 @@
         ref="goodsImage"/>
       <goods-list :goods="recommends" ref="recommend"/>
     </scroll>
-    <back-top @click.native="backClick" v-show="isShowBackTop"/>
     <detail-bottom-bar @addCart="addCart"/>
+
+    <back-top @click.native="backClick" v-show="isShowBackTop"/>
+    <toast :message="message" :show="show"/>
   </div>
 </template>
 
@@ -28,6 +30,7 @@ import GoodsList from "@/components/content/goods/GoodsList";
 import BackTop from "@/components/content/backTop/BackTop";
 
 import Scroll from "@/components/common/scroll/Scroll";
+import Toast from "@/components/common/toast/Toast";
 
 export default {
   name: "Detail",
@@ -40,7 +43,8 @@ export default {
     DetailBottomBar,
     GoodsList,
     BackTop,
-    Scroll
+    Scroll,
+    Toast
   },
   data() {
     return {
@@ -52,6 +56,8 @@ export default {
       recommends: [],
       topY: [],
       isShowBackTop: false,
+      message: '',
+      show: false
     }
 
   },
@@ -105,7 +111,16 @@ export default {
       product.price = this.goods.price
 
       console.log(product)
-      this.$store.dispatch('addCart', product)
+      this.$store.dispatch('addCart', product).then(res => {
+        // console.log(res)
+        this.show = true;
+        this.message = res;
+
+        setTimeout(() => {
+          this.show = false;
+          this.message = ''
+        }, 1000)
+      })
     }
   },
   mounted() {
